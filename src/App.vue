@@ -1,13 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+
+import { mapState } from 'vuex'
+
 export default {
-  name: 'App'
+  name: 'App',
+
+  computed: mapState([
+    'posts'
+  ]),
+
+  beforeMount() {
+    const dispatch = this.$store.dispatch
+
+    dispatch('loadPostsList')
+
+    console.log(this.$store.state.posts)
+  }
 }
 </script>
 
